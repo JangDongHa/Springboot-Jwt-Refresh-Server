@@ -1,13 +1,13 @@
 package com.dong.jwt.config.jwt;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
 import com.dong.jwt.config.auth.PrincipalDetails;
+import com.dong.jwt.config.jwt.token.ResponseToken;
 import com.dong.jwt.model.TokenValidate;
 import com.dong.jwt.model.User;
 import com.dong.jwt.repository.TokenValidateRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.http.parser.Authorization;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,7 +19,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
 
 // 스프링 시큐리티에서 UsernamePasswordAuthenticationFilter 가 존재
 // 원래 /login 해서 username, password 를 전송하면 UsernamePasswordAuthenticationFilter 가 동작함
@@ -50,10 +49,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             ObjectMapper om = new ObjectMapper(); // JSON Data를 파싱해줌
             User user = om.readValue(request.getInputStream(), User.class);
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()); // 토큰 생성
-            
+
             // PrincipalDetailsService의 loadUserByUsername() 이 실행된 후 정상이면 authentication 이 리턴되고 정상이 아니면 unAuthorized 가 throw 되면서 이 아래 있는 변수들은 실행 안됨
             Authentication authentication = authenticationManager.authenticate(token);
-            
+
+
             // 로그인이 정상적으로 처리되면 authentication getPrincipal 에서 유저정보를 가져올 수 있음
             PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
             System.out.println("로그인완료 : " + principalDetails.getUser().getUsername());

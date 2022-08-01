@@ -51,9 +51,7 @@ public class SecurityConfig {
                 .formLogin().disable() // JWT 로 로그인을 할 것이기 때문에 안함 (JWT 서버는 이 위까지는 기본)
                 .httpBasic().disable() // 기본적인 http 로그인 방식을 사용하지 않겠다는 것 (세션 사용x + basic 사용 x 를 진행하면 Bearer 방식을 사용한다는 것)
                 .authorizeRequests()
-                    .antMatchers("/api/v1/user/**").authenticated()//access("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
-                    .antMatchers("/api/v1/manager/**").access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
-                    .antMatchers("/api/v1/admin/**").access("hasRole('ROLE_ADMIN')")
+                    .antMatchers("/api").authenticated()//access("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
                     .anyRequest().permitAll()
                 .and().build();
                 

@@ -2,9 +2,11 @@ package com.dong.jwt.config.jwt;
 
 
 import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.dong.jwt.config.auth.PrincipalDetails;
+import com.dong.jwt.config.jwt.token.RequestToken;
+import com.dong.jwt.config.jwt.token.ResponseToken;
+import com.dong.jwt.config.jwt.token.properties.AccessTokenProperties;
+import com.dong.jwt.config.jwt.token.properties.CommonTokenProperties;
 import com.dong.jwt.model.TokenValidate;
 import com.dong.jwt.model.User;
 import com.dong.jwt.repository.TokenValidateRepository;
@@ -12,18 +14,15 @@ import com.dong.jwt.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 
 // 시큐리티가 filter 를 가지고 있는데 그 filter 중에 BasicAuthenticationFilter 라는 것이 있음
 // 무조건 해당 filter 를 타긴 하는데 이 filter 가 하는 일은 기본적으로 토큰이 있는지(현재 클래스 기준) 확인하고 그에 따른 처리를 진행하는 것

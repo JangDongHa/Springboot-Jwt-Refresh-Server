@@ -1,8 +1,11 @@
-package com.dong.jwt.config.jwt;
+package com.dong.jwt.config.jwt.token;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.dong.jwt.config.auth.PrincipalDetails;
+import com.dong.jwt.config.jwt.token.properties.AccessTokenProperties;
+import com.dong.jwt.config.jwt.token.properties.CommonTokenProperties;
+import com.dong.jwt.config.jwt.token.properties.RefreshTokenProperties;
 import lombok.Getter;
 
 import java.util.Date;

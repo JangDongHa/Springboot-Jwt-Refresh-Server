@@ -18,7 +18,7 @@ public class User {
     private long id;
     private String username;
     private String password;
-    private String roles; // USER, ADMIN
+    private String roles; // USER
 
     public List<String> getRoleList(){
         if (this.roles.length() > 0){ // 존재하면
