@@ -4,6 +4,7 @@ import com.dong.jwt.config.jwt.JwtAuthenticationFilter;
 import com.dong.jwt.config.jwt.JwtAuthorizationFilter;
 import com.dong.jwt.filter.MyFilter1;
 import com.dong.jwt.filter.MyFilter3;
+import com.dong.jwt.repository.TokenValidateRepository;
 import com.dong.jwt.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -27,6 +28,9 @@ public class SecurityConfig {
     private UserRepository userRepository;
     @Autowired
     private CorsConfig config;
+
+    @Autowired
+    private TokenValidateRepository tokenValidateRepository;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
@@ -61,8 +65,8 @@ public class SecurityConfig {
             AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
             http
                     .addFilter(config.corsFilter())
-                    .addFilter(new JwtAuthenticationFilter(authenticationManager))
-                    .addFilter(new JwtAuthorizationFilter(authenticationManager, userRepository));
+                    .addFilter(new JwtAuthenticationFilter(authenticationManager, tokenValidateRepository))
+                    .addFilter(new JwtAuthorizationFilter(authenticationManager, userRepository, tokenValidateRepository));
         }
     }
 }
