@@ -49,7 +49,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
 
         String jwtHeader = request.getHeader(AccessTokenProperties.HEADER_STRING);
-        System.out.println("jwtHeader : " + jwtHeader);
         
         // JWT Token 을 검증하여 정상적인 사용자인지 확인해봐야함
         if (jwtHeader == null || !jwtHeader.startsWith(CommonTokenProperties.TOKEN_PREFIX)){ // 헤더가 없거나 Bearer 이 아닌 경우
