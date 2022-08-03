@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,24 +46,26 @@ public class BoardApiController {
 
     @ApiOperation(value = "게시글 작성", notes = NEED_LOGIN + NEED_TOKEN)
     @PostMapping("/api/board") // 게시글 작성
-    public boolean postBoard(
+    public ResponseDto<String> postBoard(
             @ApiParam(value = "게시글 작성 내용", required = true, example = "title, author, content")
             @RequestBody BoardDto boardDto,
             @AuthenticationPrincipal PrincipalDetails principalDetails){
         boardDto.setUser(principalDetails.getUser());
-        return boardService.postBoard(boardDto);
+        boardService.postBoard(boardDto);
+        return new ResponseDto<>(HttpStatus.OK, "게시글 작성 완료");
     }
 
 
     @ApiOperation(value = "게시글 수정", notes = NEED_AUTHORIZATION + NEED_TOKEN)
     @PutMapping("/api/board") // 게시글 수정
-    public void updateBoard(
+    public ResponseDto<String> updateBoard(
             @ApiParam(value = "게시글 수정 내용", required = true, example = "title, author, content")
             @RequestBody BoardDto boardDto,
             @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception {
         boardDto.setUser(principalDetails.getUser());
 
         boardService.reviseBoard(boardDto);
+        return new ResponseDto<>(HttpStatus.OK, "게시글 작성 완료");
     }
 
     @ApiOperation(value = "게시글 삭제", notes = NEED_AUTHORIZATION + NEED_TOKEN)

@@ -25,8 +25,10 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public ResponseDto<String> joinUser(User user){
-        if (userRepository.findByUsername(user.getUsername()) == null)
+        if (userRepository.findByUsername(user.getUsername()) != null) {
+            System.out.println(userRepository.findByUsername(user.getUsername()));
             throw new IllegalArgumentException("중복된 닉네임입니다.");
+        }
 
         if (checkUsernameAndPassword(user.getUsername(), user.getPassword())){
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
