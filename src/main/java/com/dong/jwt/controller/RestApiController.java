@@ -25,7 +25,6 @@ public class RestApiController {
 
     @PostMapping("/token")
     public String postToken(){
-        System.out.println("토큰입장!");
         return "<h1>Token</h1>";
     }
 
@@ -34,7 +33,7 @@ public class RestApiController {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRoles("ROLE_USER");
         userRepository.save(user);
-        return "<h1>good</h1>";
+        return "<h1>join</h1>";
     }
 
     @GetMapping("api/v1/user")

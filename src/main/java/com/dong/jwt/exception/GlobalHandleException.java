@@ -12,4 +12,6 @@ public class GlobalHandleException {
     public String proceedAllException(Exception e){
         return String.format("<h1>%s</h1>", e.getMessage());
     }
+
+
 }

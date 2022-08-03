@@ -1,14 +1,13 @@
 package com.dong.jwt.dto;
 
-import com.dong.jwt.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.http.HttpStatus;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
-public class RequestBoardUpdateDeleteCheckDto {
-    private long id;
-    private User user;
+public class ResponseDto<T> {
+    HttpStatus httpStatus;
+    T data;
 }

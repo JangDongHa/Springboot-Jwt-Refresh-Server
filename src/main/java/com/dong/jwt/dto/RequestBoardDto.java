@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class RequestBoardPostDto {
+public class RequestBoardDto {
+    private long id;
     private String title;
     private String author;
     private String password;

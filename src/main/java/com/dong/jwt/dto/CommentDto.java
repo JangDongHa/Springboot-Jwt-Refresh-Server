@@ -2,13 +2,15 @@ package com.dong.jwt.dto;
 
 import com.dong.jwt.model.User;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class RequestBoardUpdateDeleteCheckDto {
-    private long id;
+@AllArgsConstructor
+@Getter
+@Setter
+public class CommentDto {
     private User user;
+    private String comment;
 }

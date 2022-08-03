@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-// 원래는 http://localhost:8080/login 에서 동작하지만 formLogin()이 disable 상태이므로 동작 x (필터로 따로 설정해줘야함)
 @Service
 public class PrincipalDetailsService implements UserDetailsService {
 

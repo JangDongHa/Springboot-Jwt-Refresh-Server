@@ -20,7 +20,6 @@ public class CorsConfig {
         config.addAllowedHeader("*"); // 모든 Header에 대한 응답을 허용
         config.addAllowedMethod("*"); // 모든 메소드(GET, POST, PUT....)에 대한 응답을 허용
 
-        System.out.println("CORS Filter!");
         source.registerCorsConfiguration("/api/**", config);
         return new CorsFilter(source);
     }
